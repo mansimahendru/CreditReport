@@ -22,7 +22,8 @@ public class CreditCalculator {
             CreditReport cr = new CreditReport();
             while ((str = reader.readLine()) != null) {
                 TradeLine tradeLine = TradeLine.getTradeLine(str);
-                cr.addTradLine(tradeLine);
+                if(tradeLine != null)
+                    cr.addTradLine(tradeLine);
             }
             CRExpenseCalculatorService.calculateExpense(cr);
             System.out.println(CreditReport.getJson(cr));
