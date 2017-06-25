@@ -26,7 +26,9 @@ public class CreditCalculator {
                     cr.addTradLine(tradeLine);
             }
             CRExpenseCalculatorService.calculateExpense(cr);
+            // using ObjectMapper
             System.out.println(CreditReport.getJson(cr));
+            // without using ObjectMapper
             System.out.println(cr.toJson());
         }
         catch(Exception ex) {
