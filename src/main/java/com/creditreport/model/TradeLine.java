@@ -12,7 +12,7 @@ import com.creditreport.service.CurrencyConversionService;
  * Liability is calculated from code and subcode.
  * Type is obtained from liability. This is done for easy json serialization/deserialization.
  */
-public class TradeLine {
+public final class TradeLine {
     @JsonIgnore
     private String date;
     @JsonIgnore
@@ -27,6 +27,10 @@ public class TradeLine {
     private long current_balance;
     @JsonIgnore
     private Liability li;
+
+    private TradeLine() {
+
+    }
 
     public String getDate() {
         return date;
@@ -105,5 +109,21 @@ public class TradeLine {
             return null;
         }
         return tradeLine;
+    }
+
+    // In this method there is no need to check nulls.
+    // If tradeline is instantiated then it will always have value for type
+    // it will always have some value for monthly payment and current balance or 0
+    // the above is taken care in getTradeLine method
+    public String toJson() {
+        StringBuffer buf = new StringBuffer();
+        buf.append("{");
+        buf.append("\"type\":\"").append(type).append("\"");
+        buf.append(",");
+        buf.append("\"monthly_payment\":").append(monthly_payment);
+        buf.append(",");
+        buf.append("\"current_balance\":").append(current_balance);
+        buf.append("}");
+        return buf.toString();
     }
 }

@@ -73,4 +73,22 @@ public class CreditReport {
         crJson = mapper.writeValueAsString(cr);
         return crJson;
     }
+
+    public String toJson() {
+        StringBuffer buf = new StringBuffer();
+        buf.append("{");
+        buf.append("\"fixed_expenses_before_education\":").append(fixed_expenses_before_education);
+        buf.append(",");
+        buf.append("\"tradelines\":[");
+        boolean first = true;
+        for(TradeLine tradeLine : tradeLines){
+            if(!first){
+                buf.append(",");
+            }
+            first = false;
+            buf.append(tradeLine.toJson());
+        }
+        buf.append("]}");
+        return buf.toString();
+    }
 }

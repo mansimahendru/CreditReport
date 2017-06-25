@@ -27,6 +27,7 @@ public class CreditCalculator {
             }
             CRExpenseCalculatorService.calculateExpense(cr);
             System.out.println(CreditReport.getJson(cr));
+            System.out.println(cr.toJson());
         }
         catch(Exception ex) {
             ex.printStackTrace();
